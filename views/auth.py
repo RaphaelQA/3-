@@ -7,7 +7,7 @@ auth_ns = Namespace('auth')
 
 
 @auth_ns.route('/')
-class AuthView(Namespace):
+class AuthView(Resource):
 
     def post(self):
         req_json = request.json
