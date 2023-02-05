@@ -27,7 +27,7 @@ class UserService:
             password.encode('utf-8'),
             PWD_HASH_SALT,
             PWD_HASH_ITERATIONS)
-        return base64.b64decode(hash_digest)
+        return base64.b64encode(hash_digest)
 
     def compare_passwords(self, hash, password):
         decode_dipest = base64.b64decode(hash)

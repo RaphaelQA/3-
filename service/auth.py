@@ -40,7 +40,7 @@ class AuthService:
         }
 
     def refresh_token(self, token):
-        data = jwt.decode(jwt=token, key=SECRET, algorithm=[ALGO])
+        data = jwt.decode(jwt=token, key=SECRET, algorithms=[ALGO])
         username = data.get('username')
 
         return self.generate_token(username, None, is_refresh=True)

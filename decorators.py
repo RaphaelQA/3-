@@ -11,7 +11,7 @@ def auth_required(func):
             abort(401)
 
         data = request.headers['Authorization']
-        token = data.split('Bearer')[-1]
+        token = data.split('Bearer ')[-1]
 
         try:
             jwt.decode(token, SECRET, algorithms=[ALGO])
@@ -28,7 +28,7 @@ def admin_required(func):
             abort(401)
 
         data = request.headers['Authorization']
-        token = data.split('Bearer')[-1]
+        token = data.split('Bearer ')[-1]
 
         try:
             user = jwt.decode(token, SECRET, algorithms=[ALGO])
