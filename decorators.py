@@ -5,6 +5,7 @@ import jwt
 from constants import SECRET, ALGO
 
 
+
 def auth_required(func):
     def wrapper(*args, **kwargs):
         if 'Authorization' not in request.headers:
