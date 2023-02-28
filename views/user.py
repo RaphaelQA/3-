@@ -43,13 +43,26 @@ class UserView(Resource):
 
         return '', 204
 
-@user_ns.route('/<int:uid>/password')
+@user_ns.route('/<int:uid>/password/')
 class UserView(Resource):
     def put(self, uid):
         req_json = request.json
         if 'id' not in req_json:
             req_json['id'] = uid
 
-        user_service.update_pass(req_json)
+        user_id = req_json.get("id")
+        old_password = req_json.get("old_password")
+        new_password = req_json.get("new_password")
 
-        return 'Пароль успешно сменен', 201
+        user = user_service.get_one(user_id)
+
+        if user_service.compare_passwords(user.password, old_password):
+            user.password = user_service.get_hash(new_password)
+            res = UserSchema().dump(user)
+            print(res)
+
+            user_service.update(res)
+
+            return 'Пароль успешно сменен', 201
+        else:
+            return 'Пароль не изменен', 400

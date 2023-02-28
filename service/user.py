@@ -50,6 +50,4 @@ class UserService:
         return self.dao.update(u_data)
 
     def update_pass(self, u_data):
-        u_data['password'] = self.get_hash(u_data['password'])
-
         return self.dao.updade_pass(u_data)
